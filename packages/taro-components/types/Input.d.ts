@@ -6,6 +6,12 @@ interface InputProps extends StandardProps, FormItemProps {
    */
   value?: string
 
+  /** 设置 React 非受控输入框的初始内容
+   * @supported h5, rn, weapp, alipay, swan, tt, qq, jd, h5, rn, harmony_hybrid
+   * @unique
+   */
+  defaultValue?: string
+
   /** input 的类型
    * @default "text"
    * @supported weapp, alipay, swan, tt, qq, jd, h5, rn
@@ -192,11 +198,11 @@ interface InputProps extends StandardProps, FormItemProps {
    */
   ariaLabel?: string
 
-  /** 是否启用原生键盘。
-   * @supported alipay
-   * @default true
+  /** 用于分发目的。取值：0 和 1，其中 0 表示默认，1 表示手机号，需要和留资分发配置一起使用，详情见留资分发配置。
+   * @supported tt
+   * @default 0
    */
-  enableNative?: boolean
+  clueType?: number
 
   /** 当键盘输入时，触发input事件，event.detail = {value, cursor, keyCode}，处理函数可以直接 return 一个字符串，将替换输入框的内容。
    * @supported weapp, alipay, swan, tt, qq, jd, h5, rn
@@ -215,12 +221,11 @@ interface InputProps extends StandardProps, FormItemProps {
 
   /** 点击完成按钮时触发
    * @supported weapp, alipay, swan, tt, qq, jd, h5, rn
-   * @h5 借用[Form 组件](./form)的`onSubmit`事件来替代
    */
   onConfirm?: CommonEventFunction<InputProps.inputValueEventDetail>
 
   /** 键盘高度发生变化的时候触发此事件
-   * @supported weapp, qq
+   * @supported weapp, tt, qq
    */
   onKeyboardHeightChange?: CommonEventFunction<InputProps.onKeyboardHeightChangeEventDetail>
 
@@ -233,12 +238,12 @@ declare namespace InputProps {
   /** Input 类型 */
   interface Type {
     /** 文本输入键盘
-     * @supported weapp, alipay, h5, rn
+     * @supported weapp, alipay, h5, rn, harmony_hybrid
      */
     text
 
     /** 数字输入键盘
-     * @supported weapp, alipay, h5, rn
+     * @supported weapp, alipay, h5, rn, harmony_hybrid
      */
     number
 
@@ -248,7 +253,7 @@ declare namespace InputProps {
     idcard
 
     /** 带小数点的数字键盘
-     * @supported weapp, alipay, h5, rn
+     * @supported weapp, alipay, h5, rn, harmony_hybrid
      */
     digit
 
@@ -329,7 +334,7 @@ declare namespace InputProps {
 
 /** 输入框。该组件是原生组件，使用时请注意相关限制
  * @classification forms
- * @supported weapp, alipay, swan, tt, qq, jd, h5, rn, harmony
+ * @supported weapp, alipay, swan, tt, qq, jd, h5, rn, harmony, harmony_hybrid
  * @example_react
  * ```tsx
  * class App extends Component {
